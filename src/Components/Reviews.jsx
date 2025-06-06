@@ -1,0 +1,57 @@
+import { FaStar } from 'react-icons/fa';
+
+const reviews = [
+  {
+    name: "Sarah Johnson",
+    role: "Laptop Screen Repair",
+    message: "Amazing service! They fixed my laptop screen in just one day. Professional and affordable.",
+    img: "https://randomuser.me/api/portraits/women/44.jpg",
+  },
+  {
+    name: "Mike Chen",
+    role: "Phone Repair",
+    message: "My phone was completely dead, but they brought it back to life. Excellent work!",
+    img: "https://randomuser.me/api/portraits/men/45.jpg",
+  },
+  {
+    name: "Emma Davis",
+    role: "Gaming Console Fix",
+    message: "Fast, reliable, and great customer service. I’ll definitely use them again.",
+    img: "https://randomuser.me/api/portraits/women/46.jpg",
+  },
+];
+
+const Review = () => (
+  <div className="bg-[#f9fafb] py-20 text-center px-4 ">
+    <h2 className="text-3xl md:text-5xl font-bold text-neutral">What Our Customers Say</h2>
+    <p className="text-base-content mt-2 mb-8">
+      Don’t just take our word for it – hear from our satisfied customers
+    </p>
+
+    <div className="grid gap-6 md:grid-cols-3 max-w-7xl mx-auto">
+      {reviews.map((review, idx) => (
+        <div key={idx} className="card bg-white shadow-md rounded-lg p-6 text-left">
+          <div className="flex mb-4 text-orange-500">
+            {[...Array(5)].map((_, i) => (
+              <FaStar key={i} />
+            ))}
+          </div>
+          <p className="italic text-base-content mb-4">"{review.message}"</p>
+          <div className="flex items-center gap-4">
+            <img
+              src={review.img}
+              alt={review.name}
+              className="w-10 h-10 rounded-full object-cover"
+            />
+            <div>
+              <p className="font-semibold text-neutral">{review.name}</p>
+              <p className="text-sm text-base-content">{review.role}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+export default Review;

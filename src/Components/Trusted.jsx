@@ -5,7 +5,7 @@ const Trusted = () => {
   return (
     <section className="bg-secondary text-white py-16 px-6">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl md:text-6xl font-bold mb-4">
+        <h2 className="text-3xl md:text-5xl font-bold mb-4">
           Trusted by Thousands
         </h2>
         <p className="text-gray-300 mb-12">
