@@ -1,2 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui"{
+    themes: light --default
+}
+
+
+
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+    --color-primary: #F97316;
+    --color-secondary: #1E293B;
+    --color-base-200: #F3F3F3;
+    --color-base-300: #E7E7E7;
+    --color-accent: #706F6F;
+}
+
+.roboto-font {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+  }
+
+    .navbar a:hover{
+    color: #F97316;
+  }
+
+  .navbar a.active{
+    color: #F97316;
+    font-weight: bold;
+  }
