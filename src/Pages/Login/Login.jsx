@@ -1,9 +1,44 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { FaSignInAlt } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../AuthProvider/Context";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router";
 
 const Login = () => {
-    const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const {signInUser} = use(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    signInUser(email, password)
+         .then((result) => {
+            const user = result.user;
+            console.log(user);
+    
+            Swal.fire({
+              title: "Signup successfully!",
+              icon: "success",
+              draggable: true,
+            });
+            navigate(location?.state || "/")
+          })
+          .catch((error) => {
+            const errorMessage = error.code;
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: errorMessage
+            });
+          });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f8fafc]">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow border border-green-100">
@@ -11,7 +46,7 @@ const Login = () => {
         <p className="text-center text-sm text-gray-500 mb-6">
           Sign in to your Fixitron account
         </p>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="form-control mb-4">
             <label className="label">
               <span className="label-text font-medium">Email</span>
@@ -52,9 +87,7 @@ const Login = () => {
         <div className="divider text-sm text-gray-400">OR CONTINUE WITH</div>
 
         {/* Google sign in */}
-        <button
-          className="btn btn-outline w-full flex items-center justify-center gap-2 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100"
-        >
+        <button className="btn btn-outline w-full flex items-center justify-center gap-2 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100">
           <FcGoogle size={25} />
           Google
         </button>

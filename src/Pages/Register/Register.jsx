@@ -1,9 +1,57 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { CiUser } from "react-icons/ci";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../AuthProvider/Context";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router";
 
 const Register = () => {
-    const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const { createUser } = use(AuthContext);
+  const [error, setError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const name = formData.get("name");
+    const photo = formData.get("photo");
+
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+
+        Swal.fire({
+          title: "Signup successfully!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate(location?.state || "/")
+      })
+      .catch((error) => {
+        const errorMessage = error.code;
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: errorMessage
+        });
+      });
+
+    //password validate
+    const passwordRegExp = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+    if (passwordRegExp.test(password) === false) {
+      setError(
+        "Password must have one uppercase, one lowercase, and 6 characters or longer"
+      );
+      return;
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f7fbf2]">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow border border-green-100">
@@ -13,7 +61,7 @@ const Register = () => {
         <p className="text-center text-sm text-gray-500 mb-6">
           Enter your details below to join Fixitron
         </p>
-        <form>
+        <form onSubmit={handleSignup}>
           <div className="form-control mb-4">
             <label className="label">
               <span className="label-text font-medium">Name</span>
@@ -76,14 +124,11 @@ const Register = () => {
             Create an Account
           </button>
         </form>
-        {/* <p className="text-error">{error}</p> */}
+        <p className="text-error">{error}</p>
         <div className="divider text-sm text-gray-400">OR CONTINUE WITH</div>
 
         {/* Google sign in */}
-        <button
-          
-          className="btn btn-outline w-full flex items-center justify-center gap-2 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100 focus:outline-none"
-        >
+        <button className="btn btn-outline w-full flex items-center justify-center gap-2 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100 focus:outline-none">
           <FcGoogle size={25} />
           Google
         </button>
