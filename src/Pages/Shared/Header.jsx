@@ -2,17 +2,29 @@ import React from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { Link, NavLink } from "react-router";
 import logo from "/logo.png";
+import { MdOutlineArrowDropUp } from "react-icons/md";
 
 const Header = () => {
   const link = (
     <>
       {" "}
       <NavLink to={"/"}>Home</NavLink>
-      <NavLink to={"/all-services"}>All services</NavLink>
+      <NavLink to={"/all-services"}>All Services</NavLink>
+      <div className="dropdown dropdown-start">
+        <div tabIndex={0} role="button" className="btn m-1 btn-outline btn-primary">
+          Dashboard <MdOutlineArrowDropUp size={20} />
+        </div>
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+        >
+          <NavLink to={"/add-service"}>Add Service</NavLink>
+        </ul>
+      </div>
       <div className="flex items-center gap-2">
-
-          <NavLink to={"/auth/login"}><button className="btn btn-secondary register-btn">Login</button></NavLink>
-
+        <NavLink to={"/auth/login"}>
+          <button className="btn btn-secondary register-btn">Login</button>
+        </NavLink>
       </div>
     </>
   );

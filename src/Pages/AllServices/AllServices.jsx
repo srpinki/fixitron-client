@@ -1,11 +1,10 @@
-import React from 'react';
+
+import React from "react";
 
 const AllServices = () => {
-    return (
-        <div>
-            All services
-        </div>
-    );
+  return (
+    <div>All services</div>
+  );
 };
 
 export default AllServices;

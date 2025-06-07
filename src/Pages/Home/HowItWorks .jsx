@@ -16,7 +16,7 @@ const HowItWorks = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-secondary">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-secondary">
             How It Works
           </h2>
           <p className="text-gray-500 mb-16 max-w-2xl mx-auto">
