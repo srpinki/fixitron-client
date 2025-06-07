@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const {signInUser} = use(AuthContext);
+  const { signInUser, googleSignIn } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -18,25 +18,46 @@ const Login = () => {
     const password = e.target.password.value;
 
     signInUser(email, password)
-         .then((result) => {
-            const user = result.user;
-            console.log(user);
-    
-            Swal.fire({
-              title: "Signup successfully!",
-              icon: "success",
-              draggable: true,
-            });
-            navigate(location?.state || "/")
-          })
-          .catch((error) => {
-            const errorMessage = error.code;
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: errorMessage
-            });
-          });
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+
+        Swal.fire({
+          title: "Signup successfully!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate(location?.state || "/");
+      })
+      .catch((error) => {
+        const errorMessage = error.code;
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: errorMessage,
+        });
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          title: "Login successfully!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate(location?.state || "/");
+      })
+      .catch((error) => {
+        const errorMessage = error.code;
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: errorMessage,
+        });
+      });
   };
 
   return (
@@ -87,7 +108,10 @@ const Login = () => {
         <div className="divider text-sm text-gray-400">OR CONTINUE WITH</div>
 
         {/* Google sign in */}
-        <button className="btn btn-outline w-full flex items-center justify-center gap-2 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100">
+        <button
+          onClick={handleGoogleLogin}
+          className="btn btn-outline w-full flex items-center justify-center gap-2 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100"
+        >
           <FcGoogle size={25} />
           Google
         </button>
