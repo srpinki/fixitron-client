@@ -1,31 +1,64 @@
-import React from "react";
+import React, { use } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { Link, NavLink } from "react-router";
 import logo from "/logo.png";
 import { MdOutlineArrowDropUp } from "react-icons/md";
+import { AuthContext } from "../../AuthProvider/Context";
 
 const Header = () => {
+  const { user, logOut } = use(AuthContext);
+  console.log(user);
+
+  const handleLogout = () => {
+    logOut(() => {
+      console.log("Signout successfully");
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
   const link = (
     <>
       {" "}
       <NavLink to={"/"}>Home</NavLink>
       <NavLink to={"/all-services"}>All Services</NavLink>
-      <div className="dropdown dropdown-start">
-        <div tabIndex={0} role="button" className="btn m-1 btn-outline btn-primary">
-          Dashboard <MdOutlineArrowDropUp size={20} />
+      {user ? (
+        <div className="flex flex-col md:flex-row items-baseline md:items-center space-x-2 space-y-2 md:space-y-0">
+          <div className="dropdown dropdown-start">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn m-1 btn-outline btn-primary"
+            >
+              Dashboard <MdOutlineArrowDropUp size={20} />
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <NavLink to={"/add-service"}>Add Service</NavLink>
+            </ul>
+          </div>
+          <div>
+            <img
+              src={user.photoURL}
+              alt="User Avatar"
+              className="w-10 h-10 rounded-full border-2 border-secondary cursor-pointer"
+            />
+          </div>
+          <button
+            onClick={handleLogout}
+            className="btn btn-secondary text-white px-3 py-1 rounded "
+          >
+            Log Out
+          </button>
         </div>
-        <ul
-          tabIndex={0}
-          className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-        >
-          <NavLink to={"/add-service"}>Add Service</NavLink>
-        </ul>
-      </div>
-      <div className="flex items-center gap-2">
-        <NavLink to={"/auth/login"}>
-          <button className="btn btn-secondary register-btn">Login</button>
-        </NavLink>
-      </div>
+      ) : (
+        <div className="flex items-center gap-2">
+          <NavLink to={"/auth/login"}>
+            <button className="btn btn-secondary register-btn">Login</button>
+          </NavLink>
+        </div>
+      )}
     </>
   );
   return (

@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { createUser, googleSignIn } = use(AuthContext);
+  const { createUser, googleSignIn, updateUser, setUser } = use(AuthContext);
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,21 +24,27 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        updateUser({ displayName: name, photoURL: photo })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photo });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
 
         Swal.fire({
           title: "Signup successfully!",
           icon: "success",
           draggable: true,
         });
-        navigate(location?.state || "/")
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         const errorMessage = error.code;
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: errorMessage
+          text: errorMessage,
         });
       });
 
@@ -52,26 +58,26 @@ const Register = () => {
     }
   };
 
-    const handleGoogleLogin = () => {
-      googleSignIn()
-        .then((result) => {
-          console.log(result);
-          Swal.fire({
-            title: "Login successfully!",
-            icon: "success",
-            draggable: true,
-          });
-          navigate(location?.state || "/");
-        })
-        .catch((error) => {
-          const errorMessage = error.code;
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: errorMessage,
-          });
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          title: "Login successfully!",
+          icon: "success",
+          draggable: true,
         });
-    };
+        navigate(location?.state || "/");
+      })
+      .catch((error) => {
+        const errorMessage = error.code;
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: errorMessage,
+        });
+      });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f7fbf2]">
@@ -149,7 +155,10 @@ const Register = () => {
         <div className="divider text-sm text-gray-400">OR CONTINUE WITH</div>
 
         {/* Google sign in */}
-        <button onClick={handleGoogleLogin} className="btn btn-outline w-full flex items-center justify-center gap-2 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100 focus:outline-none">
+        <button
+          onClick={handleGoogleLogin}
+          className="btn btn-outline w-full flex items-center justify-center gap-2 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100 focus:outline-none"
+        >
           <FcGoogle size={25} />
           Google
         </button>

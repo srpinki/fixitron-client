@@ -9,6 +9,7 @@ import AuthLayouts from "../Pages/Layouts/AuthLayouts";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Error from "../Pages/Error/Error";
+import PrivateRoute from "../AuthProvider/PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
         },
         {
             path: "/add-service",
-            Component: AddService
+            element: <PrivateRoute><AddService></AddService></PrivateRoute>
         }
     ]
   },
