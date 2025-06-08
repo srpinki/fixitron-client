@@ -1,11 +1,43 @@
-import React from "react";
+import axios from "axios";
+import React, { use } from "react";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../AuthProvider/Context";
 
 const AddService = () => {
+  const { user } = use(AuthContext);
 
-    const handleAddService = (e) => {
-        e.preventDefault();
-    }
-    
+  const handleAddService = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const newServices = Object.fromEntries(formData.entries());
+
+    const fullServiceData = {
+      ...newServices,
+      providerName: user?.displayName || "Anonymous",
+      providerEmail: user?.email,
+      providerImage: user?.photoURL,
+    };
+
+    //send data to server
+    axios
+      .post("http://localhost:3000/services", fullServiceData)
+      .then((result) => {
+        if (result.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your services has been sent",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="bg-[#f8fafc] py-20">
       <div className="max-w-2xl mx-auto px-4 py-10 bg-white shadow-sm border rounded-xl border-[#e2e8f0] ">
@@ -26,6 +58,7 @@ const AddService = () => {
               type="text"
               placeholder="Enter image URL for your service"
               className="input input-bordered w-full focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100"
+              name="photo_url"
             />
           </div>
 
@@ -41,6 +74,7 @@ const AddService = () => {
               placeholder="e.g., Smartphone Screen Repair"
               className="input input-bordered w-full focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100"
               required
+              name="service_name"
             />
           </div>
 
@@ -56,6 +90,7 @@ const AddService = () => {
               placeholder="Enter service price"
               className="input input-bordered w-full focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100"
               required
+              name="service_price"
             />
           </div>
 
@@ -71,6 +106,7 @@ const AddService = () => {
               placeholder="e.g., New York, California"
               className="input input-bordered w-full focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100"
               required
+              name="service_area"
             />
           </div>
 
@@ -86,6 +122,7 @@ const AddService = () => {
               placeholder="Describe your service in detail..."
               rows="4"
               required
+              name="service_description"
             ></textarea>
           </div>
 
