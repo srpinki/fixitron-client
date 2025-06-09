@@ -9,8 +9,16 @@ import {
   FaStar,
   FaUserTie,
 } from "react-icons/fa";
+import { useLoaderData, useParams } from "react-router";
 
 const ServiceDetails = () => {
+  const services = useLoaderData();
+  const {id} = useParams();
+  const ServiceDetails = services.find(service => service._id == id);
+  const {photo_url, service_name, service_price, service_area, service_description, providerName, providerEmail, providerImage} = ServiceDetails;
+  
+  
+  
   return (
     <div className="w-11/12 mx-auto py-16">
       <div className="bg-gradient-to-r from-[#F8ECE4] to-[#e1e3e6] p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
@@ -18,7 +26,7 @@ const ServiceDetails = () => {
         <div className="flex items-center gap-4">
           <div className="relative">
             <img
-              src="https://randomuser.me/api/portraits/men/32.jpg"
+              src={providerImage}
               className="w-20 h-20 rounded-full border-4 border-white shadow"
               alt="Provider"
             />
@@ -28,13 +36,13 @@ const ServiceDetails = () => {
           </div>
           <div>
             <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-              TechMaster Pro
+              {providerName}
               <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full">
                 Verified
               </span>
             </h2>
             <div className="text-sm text-gray-500 flex items-center gap-3 mt-1">
-              <FaMapMarkerAlt className="text-orange-500" /> DHAKA
+              <FaMapMarkerAlt className="text-orange-500" /> Dhaka
               <FaStar className="text-yellow-500" /> 4.8
             </div>
           </div>
@@ -65,7 +73,7 @@ const ServiceDetails = () => {
             <FaUserTie className="text-orange-500 text-xl" />
             <div>
               <p className="text-sm text-gray-400">Service Area</p>
-              <p className="text-lg font-semibold text-gray-800">New York</p>
+              <p className="text-lg font-semibold text-gray-800">{service_area}</p>
             </div>
           </div>
         </div>
@@ -75,12 +83,12 @@ const ServiceDetails = () => {
         {/* Image Section */}
         <div className="relative w-full md:w-1/2 rounded-2xl overflow-hidden group shadow-lg">
           <img
-            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c"
+            src={photo_url}
             alt="Service"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <span className="absolute top-3 right-3 bg-orange-500 text-white text-sm px-3 py-1 rounded-full font-semibold shadow-md">
-            $89
+            ${service_price}
           </span>
         </div>
 
@@ -88,30 +96,27 @@ const ServiceDetails = () => {
         <div className="w-full md:w-1/2 space-y-5">
           {/* Title */}
           <h2 className="text-3xl font-bold text-gray-800">
-            Smartphone Screen Repair
+            {service_name}
           </h2>
 
           {/* Description */}
           <p className="text-gray-600 leading-relaxed">
-            Professional smartphone screen replacement with high-quality parts
-            and warranty. Quick turnaround time guaranteed. We use only genuine
-            parts and provide comprehensive testing after repair. Our certified
-            technicians ensure your device works like new.
+            {service_description}
           </p>
 
           {/* Provider Info */}
           <div className="flex items-center gap-3 bg-gray-100 p-4 rounded-xl shadow-sm">
             <img
-              src="https://randomuser.me/api/portraits/men/32.jpg"
+              src={providerImage}
               className="w-10 h-10 rounded-full"
               alt="Provider"
             />
             <div>
               <h4 className="text-sm font-bold flex items-center gap-1">
-                TechMaster Pro <FaCheckCircle className="text-green-500" />
+                {providerName} <FaCheckCircle className="text-green-500" />
               </h4>
               <div className="text-gray-500 text-xs flex items-center gap-2">
-                <FaMapMarkerAlt /> New York{" "}
+                <FaMapMarkerAlt /> {service_area}
                 <FaStar className="text-yellow-500" /> 4.8
               </div>
             </div>
@@ -137,7 +142,7 @@ const ServiceDetails = () => {
           <div className="flex items-center justify-between pt-4 bg-gradient-to-r from-[#fcf0e7] to-[#e6e7ea] p-6 rounded-2xl">
             <div>
               <p className="text-sm text-gray-500">Service Price</p>
-              <p className="text-2xl font-bold text-orange-500">$89</p>
+              <p className="text-2xl font-bold text-orange-500">${service_price}</p>
             </div>
             <button className="btn bg-orange-500 hover:bg-orange-600 text-white px-6 transition-transform duration-500 group-hover:scale-105 object-cover">
               Book Now
