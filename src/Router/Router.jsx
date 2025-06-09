@@ -10,7 +10,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Error from "../Pages/Error/Error";
 import PrivateRoute from "../AuthProvider/PrivateRoute";
-import ServiceDetails from "../Pages/Shared/ServiceDetails";
+import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
 
 
 const router = createBrowserRouter([

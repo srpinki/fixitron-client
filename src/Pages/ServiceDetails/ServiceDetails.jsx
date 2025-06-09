@@ -10,15 +10,22 @@ import {
   FaUserTie,
 } from "react-icons/fa";
 import { useLoaderData, useParams } from "react-router";
+import Modal from "../Modal/Modal";
 
 const ServiceDetails = () => {
   const services = useLoaderData();
-  const {id} = useParams();
-  const ServiceDetails = services.find(service => service._id == id);
-  const {photo_url, service_name, service_price, service_area, service_description, providerName, providerEmail, providerImage} = ServiceDetails;
-  
-  
-  
+  const { id } = useParams();
+  const ServiceDetails = services.find((service) => service._id == id);
+  const {
+    photo_url,
+    service_name,
+    service_price,
+    service_area,
+    service_description,
+    providerName,
+    providerImage,
+  } = ServiceDetails;
+
   return (
     <div className="w-11/12 mx-auto py-16">
       <div className="bg-gradient-to-r from-[#F8ECE4] to-[#e1e3e6] p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
@@ -42,7 +49,7 @@ const ServiceDetails = () => {
               </span>
             </h2>
             <div className="text-sm text-gray-500 flex items-center gap-3 mt-1">
-              <FaMapMarkerAlt className="text-orange-500" /> Dhaka
+              <FaMapMarkerAlt className="text-orange-500" /> {service_area}
               <FaStar className="text-yellow-500" /> 4.8
             </div>
           </div>
@@ -73,7 +80,9 @@ const ServiceDetails = () => {
             <FaUserTie className="text-orange-500 text-xl" />
             <div>
               <p className="text-sm text-gray-400">Service Area</p>
-              <p className="text-lg font-semibold text-gray-800">{service_area}</p>
+              <p className="text-lg font-semibold text-gray-800">
+                {service_area}
+              </p>
             </div>
           </div>
         </div>
@@ -95,14 +104,10 @@ const ServiceDetails = () => {
         {/* Content Section */}
         <div className="w-full md:w-1/2 space-y-5">
           {/* Title */}
-          <h2 className="text-3xl font-bold text-gray-800">
-            {service_name}
-          </h2>
+          <h2 className="text-3xl font-bold text-gray-800">{service_name}</h2>
 
           {/* Description */}
-          <p className="text-gray-600 leading-relaxed">
-            {service_description}
-          </p>
+          <p className="text-gray-600 leading-relaxed">{service_description}</p>
 
           {/* Provider Info */}
           <div className="flex items-center gap-3 bg-gray-100 p-4 rounded-xl shadow-sm">
@@ -142,14 +147,19 @@ const ServiceDetails = () => {
           <div className="flex items-center justify-between pt-4 bg-gradient-to-r from-[#fcf0e7] to-[#e6e7ea] p-6 rounded-2xl">
             <div>
               <p className="text-sm text-gray-500">Service Price</p>
-              <p className="text-2xl font-bold text-orange-500">${service_price}</p>
+              <p className="text-2xl font-bold text-orange-500">
+                ${service_price}
+              </p>
             </div>
-            <button className="btn bg-orange-500 hover:bg-orange-600 text-white px-6 transition-transform duration-500 group-hover:scale-105 object-cover">
+            <button onClick={() =>
+            document.getElementById("service-details-modal").showModal()
+          } className="btn bg-orange-500 hover:bg-orange-600 text-white px-6 rounded-2xl transform transition-transform duration-300 hover:scale-105 hover:shadow-lg text-xl">
               Book Now
             </button>
           </div>
         </div>
       </div>
+      <Modal ServiceDetails={ServiceDetails}/>
     </div>
   );
 };
