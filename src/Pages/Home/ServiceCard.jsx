@@ -21,7 +21,7 @@ const ServiceCard = ({ service }) => {
   </div>
   <div className="p-4">
     <h2 className="text-lg font-semibold text-gray-800">{service_name}</h2>
-    <p className="text-sm text-gray-600 mt-1">{service_description}</p>
+    <p className="text-sm text-gray-600 mt-1 truncate max-w-[ch_100]">{service_description}</p>
     <div className="flex items-center justify-between mt-4">
       <div className="flex items-center gap-2">
         <img

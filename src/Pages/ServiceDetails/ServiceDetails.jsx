@@ -90,19 +90,19 @@ const ServiceDetails = () => {
 
       <div className="flex mt-5 flex-col md:flex-row gap-8 p-6 bg-white rounded-xl shadow-md">
         {/* Image Section */}
-        <div className="relative w-full md:w-1/2 rounded-2xl overflow-hidden group shadow-lg">
+        <div className="relative w-full md:w-1/2 rounded-2xl overflow-hidden group shadow-lg lg:sticky lg:top-8 lg:self-start">
           <img
             src={photo_url}
             alt="Service"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <span className="absolute top-3 right-3 bg-orange-500 text-white text-sm px-3 py-1 rounded-full font-semibold shadow-md">
+          <span className="absolute top-3 right-3 bg-orange-500 text-white text-sm px-3 py-1 rounded-full font-semibold shadow-md ">
             ${service_price}
           </span>
         </div>
 
         {/* Content Section */}
-        <div className="w-full md:w-1/2 space-y-5">
+        <div className="w-full md:w-1/2 space-y-5 ">
           {/* Title */}
           <h2 className="text-3xl font-bold text-gray-800">{service_name}</h2>
 
