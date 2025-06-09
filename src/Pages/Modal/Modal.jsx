@@ -22,7 +22,7 @@ const Modal = ({ ServiceDetails }) => {
 
   return (
     <div>
-      <dialog id="service-details-modal" className="modal">
+      <dialog id="service-details-modal" className="modal min-h-screen">
         <div className="modal-box w-11/12 max-w-4xl">
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">

@@ -11,6 +11,7 @@ import Register from "../Pages/Register/Register";
 import Error from "../Pages/Error/Error";
 import PrivateRoute from "../AuthProvider/PrivateRoute";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
+import Loading from "../Pages/Loading/Loading";
 
 
 const router = createBrowserRouter([
@@ -24,6 +25,8 @@ const router = createBrowserRouter([
         },
         {
             path: "/all-services",
+            hydrateFallbackElement: <Loading></Loading>,
+            loader: () => fetch('http://localhost:3000/services'),
             Component: AllServices
         },
         {
