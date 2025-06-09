@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { Suspense } from "react";
+import Hero from "./Hero";
+import Trusted from "./Trusted";
+import HowItWorks from "./HowItWorks ";
+import WhyChooseFixitron from "./WhyChooseFixitron";
+import Review from "./Reviews";
+import PopularServices from "./PopularServices";
+import Loading from "../Loading/Loading";
 
-import Hero from './Hero';
-import Trusted from './Trusted';
-import HowItWorks from './HowItWorks ';
-import WhyChooseFixitron from './WhyChooseFixitron';
-import Review from './Reviews';
-import AllServices from '../AllServices/AllServices';
-import PopularServices from './PopularServices';
+const servicesPromise = fetch("http://localhost:3000/services").then((res) =>
+  res.json()
+);
 
 const Home = () => {
-    return (
-        <div>
-            <Hero></Hero>
-            <PopularServices></PopularServices>
-            <Trusted></Trusted>
-            <HowItWorks></HowItWorks>
-            <WhyChooseFixitron></WhyChooseFixitron>
-            <Review></Review>
-        </div>
-    );
+  return (
+    <div>
+      <Hero></Hero>
+      <Suspense fallback={<Loading />}>
+        <PopularServices servicesPromise={servicesPromise}></PopularServices>
+      </Suspense>
+      <Trusted></Trusted>
+      <HowItWorks></HowItWorks>
+      <WhyChooseFixitron></WhyChooseFixitron>
+      <Review></Review>
+    </div>
+  );
 };
 
 export default Home;
