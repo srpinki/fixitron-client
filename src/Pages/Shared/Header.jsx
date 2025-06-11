@@ -36,6 +36,7 @@ const Header = () => {
               className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
             >
               <NavLink to={"/add-service"}>Add Service</NavLink>
+              <NavLink to={"/manage-services"}>Manage Services</NavLink>
             </ul>
           </div>
           <div>

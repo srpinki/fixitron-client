@@ -12,6 +12,8 @@ import Error from "../Pages/Error/Error";
 import PrivateRoute from "../AuthProvider/PrivateRoute";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
 import Loading from "../Pages/Loading/Loading";
+import ManageServices from "../Pages/ManageServices/ManageServices";
+import EditService from "../Pages/ManageServices/EditService";
 
 
 const router = createBrowserRouter([
@@ -37,6 +39,16 @@ const router = createBrowserRouter([
             path: "/service-details/:id",
             loader: () => fetch('http://localhost:3000/services'),
             element: <PrivateRoute><ServiceDetails></ServiceDetails></PrivateRoute>
+        },
+        {
+            path: "/manage-services",
+            loader: () => fetch('http://localhost:3000/services'),
+            element: <PrivateRoute><ManageServices></ManageServices></PrivateRoute>
+        },
+        {
+          path: "/update-service/:id",
+          loader: () => fetch('http://localhost:3000/services'),
+          element: <PrivateRoute><EditService></EditService></PrivateRoute>
         }
     ]
   },
