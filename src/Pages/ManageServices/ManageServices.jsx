@@ -2,13 +2,12 @@ import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/Context";
 import { useNavigate } from "react-router";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const ManageServices = () => {
   const { user } = use(AuthContext);
   const [services, setServices] = useState([]);
   const navigate = useNavigate();
-
-console.log("Services loaded:", services);
 
   useEffect(() => {
     if (user?.email) {
@@ -20,6 +19,43 @@ console.log("Services loaded:", services);
         });
     }
   }, [user?.email]);
+
+    const handleDelete = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+        console.log(result.isConfirmed);
+        
+      if (result.isConfirmed) {
+
+        //start deleting the services
+
+        fetch(`http://localhost:3000/services/${_id}`, {
+
+          method: 'DELETE'
+
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your service has been deleted.",
+                icon: "success",
+              });
+              const remainingServices = services.filter(service => service._id !== _id);
+              setServices(remainingServices);
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div className="w-11/12 mx-auto py-18">
@@ -58,7 +94,7 @@ console.log("Services loaded:", services);
                   <FaEdit />
                   Edit
                 </button>
-                <button className="btn btn-outline btn-error btn-sm flex items-center gap-1">
+                <button onClick={() => handleDelete(service._id)} className="btn btn-outline btn-error btn-sm flex items-center gap-1">
                   <FaTrash />
                   Delete
                 </button>
