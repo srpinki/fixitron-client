@@ -6,6 +6,7 @@ import { MdManageHistory, MdOutlineArrowDropUp } from "react-icons/md";
 import { AuthContext } from "../../AuthProvider/Context";
 import { IoMdAdd } from "react-icons/io";
 import { SlCalender } from "react-icons/sl";
+import { LuListTodo } from "react-icons/lu";
 
 const Header = () => {
   const { user, logOut } = use(AuthContext);
@@ -54,6 +55,13 @@ const Header = () => {
               >
                 <SlCalender />
                 Booked Services
+              </NavLink>
+              <NavLink
+                className="flex items-center gap-1"
+                to={"/service-todo"}
+              >
+                <LuListTodo />
+                Service Todo
               </NavLink>
             </ul>
           </div>
