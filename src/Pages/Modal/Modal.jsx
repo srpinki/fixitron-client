@@ -30,8 +30,8 @@ const Modal = ({ ServiceDetails }) => {
 
     const allBooking = {
       ...newBooking,
-      serviceStatus : "pending"
-    }
+      serviceStatus: "pending",
+    };
 
     //send data to server
     axios
@@ -138,6 +138,11 @@ const Modal = ({ ServiceDetails }) => {
                     </div>
                     <div>
                       <h3 className="font-semibold">{providerName}</h3>
+                      <input
+                        type="hidden"
+                        name="providerName"
+                        value={providerName}
+                      />
                       <span className="text-sm text-green-600">
                         Verified Provider
                       </span>

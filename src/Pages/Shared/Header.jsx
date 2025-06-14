@@ -2,8 +2,10 @@ import React, { use } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { Link, NavLink } from "react-router";
 import logo from "/logo.png";
-import { MdOutlineArrowDropUp } from "react-icons/md";
+import { MdManageHistory, MdOutlineArrowDropUp } from "react-icons/md";
 import { AuthContext } from "../../AuthProvider/Context";
+import { IoMdAdd } from "react-icons/io";
+import { SlCalender } from "react-icons/sl";
 
 const Header = () => {
   const { user, logOut } = use(AuthContext);
@@ -33,10 +35,26 @@ const Header = () => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm space-y-3"
             >
-              <NavLink to={"/add-service"}>Add Service</NavLink>
-              <NavLink to={"/manage-services"}>Manage Services</NavLink>
+              <NavLink className="flex items-center gap-1" to={"/add-service"}>
+                <IoMdAdd />
+                Add Service
+              </NavLink>
+              <NavLink
+                className="flex items-center gap-1"
+                to={"/manage-services"}
+              >
+                <MdManageHistory />
+                Manage Services
+              </NavLink>
+              <NavLink
+                className="flex items-center gap-1"
+                to={"/booked-services"}
+              >
+                <SlCalender />
+                Booked Services
+              </NavLink>
             </ul>
           </div>
           <div>
