@@ -6,12 +6,14 @@ import WhyChooseFixitron from "./WhyChooseFixitron";
 import Review from "./Reviews";
 import PopularServices from "./PopularServices";
 import Loading from "../Loading/Loading";
+import DocumentTitle from "../Shared/DocumentTitle";
 
 const servicesPromise = fetch("http://localhost:3000/services").then((res) =>
   res.json()
 );
 
 const Home = () => {
+  DocumentTitle("Fixitron | Find & Book Trusted Services")
   return (
     <div>
       <Hero></Hero>

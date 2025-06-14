@@ -2,8 +2,10 @@ import axios from "axios";
 import React, { use } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider/Context";
+import DocumentTitle from "../Shared/DocumentTitle";
 
 const AddService = () => {
+  DocumentTitle("Add a Service | Fixitron - Offer Your Skills")
   const { user } = use(AuthContext);
 
   const handleAddService = (e) => {

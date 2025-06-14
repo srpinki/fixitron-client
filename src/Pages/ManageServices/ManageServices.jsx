@@ -3,8 +3,10 @@ import { AuthContext } from "../../AuthProvider/Context";
 import { useNavigate } from "react-router";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import DocumentTitle from "../Shared/DocumentTitle";
 
 const ManageServices = () => {
+  DocumentTitle("Manage My Services | Fixitron - Update or Delete Listings")
   const { user } = use(AuthContext);
   const [services, setServices] = useState([]);
   const navigate = useNavigate();

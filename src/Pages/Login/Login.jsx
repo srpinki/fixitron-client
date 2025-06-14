@@ -4,8 +4,9 @@ import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../AuthProvider/Context";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router";
-
+import DocumentTitle from "../Shared/DocumentTitle";
 const Login = () => {
+  DocumentTitle("Login | Fixitron - Access Your Account Easily")
   const [showPassword, setShowPassword] = useState(false);
   const { signInUser, googleSignIn } = use(AuthContext);
   const location = useLocation();

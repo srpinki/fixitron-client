@@ -3,8 +3,10 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { useLoaderData } from "react-router";
 import AllServicesCard from "./AllServicesCard";
+import DocumentTitle from "../Shared/DocumentTitle";
 
 const AllServices = () => {
+  DocumentTitle("All Services | Fixitron - Explore & Book Services")
   const services = useLoaderData();
   
   return (

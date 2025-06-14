@@ -2,8 +2,10 @@ import React, { use, useEffect, useState } from "react";
 import { FaCalendarAlt, FaRegFileAlt } from "react-icons/fa";
 import { FaEnvelope, FaUser } from "react-icons/fa6";
 import { AuthContext } from "../../AuthProvider/Context";
+import DocumentTitle from "../Shared/DocumentTitle";
 
 const BookedServices = () => {
+  DocumentTitle("My Booked Services | Fixitron - Track Your Service Requests")
   const { user } = use(AuthContext);
   const [booked, setBookings] = useState([]);
 

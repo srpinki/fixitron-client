@@ -11,8 +11,10 @@ import {
 } from "react-icons/fa";
 import { useLoaderData, useParams } from "react-router";
 import Modal from "../Modal/Modal";
+import DocumentTitle from "../Shared/DocumentTitle";
 
 const ServiceDetails = () => {
+
   const services = useLoaderData();
   const { id } = useParams();
   const ServiceDetails = services.find((service) => service._id == id);
@@ -26,6 +28,8 @@ const ServiceDetails = () => {
     providerImage,
   } = ServiceDetails;
 
+  DocumentTitle(`${service_name} | Fixitron - Book Trusted Services`)
+  
   return (
     <div className="w-11/12 mx-auto py-16">
       <div className="bg-gradient-to-r from-[#F8ECE4] to-[#e1e3e6] p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">

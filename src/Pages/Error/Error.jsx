@@ -2,8 +2,10 @@ import React from "react";
 import error from "../../assets/lottie/error.json";
 import { Link } from "react-router";
 import Lottie from "lottie-react";
+import DocumentTitle from "../Shared/DocumentTitle";
 
 const Error = () => {
+  DocumentTitle("Page Not Found | Fixitron")
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white text-center px-6">
       <div className="w-md">
