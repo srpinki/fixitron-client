@@ -29,8 +29,6 @@ const router = createBrowserRouter([
         },
         {
             path: "/all-services",
-            hydrateFallbackElement: <Loading></Loading>,
-            loader: () => fetch('http://localhost:3000/services'),
             Component: AllServices
         },
         {
