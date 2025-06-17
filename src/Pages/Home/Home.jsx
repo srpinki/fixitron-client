@@ -8,7 +8,7 @@ import PopularServices from "./PopularServices";
 import Loading from "../Loading/Loading";
 import DocumentTitle from "../Shared/DocumentTitle";
 
-const servicesPromise = fetch("http://localhost:3000/services").then((res) =>
+const servicesPromise = fetch("https://fixitron-server.vercel.app/services").then((res) =>
   res.json()
 );
 

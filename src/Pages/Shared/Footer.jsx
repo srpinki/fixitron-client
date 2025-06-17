@@ -1,6 +1,6 @@
 import React from "react";
 import logoImage from "/footer-logo.png";
-import { FaFacebookF, FaInstagram } from "react-icons/fa6";
+import { FaFacebookF} from "react-icons/fa6";
 import { LiaLinkedinIn } from "react-icons/lia";
 import { Link } from "react-router";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
@@ -19,8 +19,8 @@ const Footer = () => {
             Professional electronic repair services with expert technicians and quality parts.
           </p>
           <div className="flex mt-4 space-x-3 text-gray-400">
-            <FaFacebookF className="hover:text-white cursor-pointer" />
-            <LiaLinkedinIn className="hover:text-white cursor-pointer" />
+            <Link to={"https://www.facebook.com/profile.php?id=61568221811046"}><FaFacebookF className="hover:text-white cursor-pointer" /></Link>
+            <Link to={"https://www.linkedin.com/in/srpinki/"}></Link><LiaLinkedinIn className="hover:text-white cursor-pointer" />
           </div>
         </div>
 

@@ -17,14 +17,18 @@ const ServiceToDo = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch("http://localhost:3000/booking_details")
+     fetch(`https://fixitron-server.vercel.app/booking_details?email=${user.email}`, {
+        headers: {
+          authorization: `Bearer ${user?.accessToken}`,
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           const filtered = data.filter((p) => p.providerEmail === user.email);
           setBookings(filtered);
         });
     }
-  }, [user?.email]);
+  }, [user?.email, user?.accessToken]);
 
   const handleChange = (e, id) => {
     const updatedStatus = e.target.value;
@@ -32,7 +36,7 @@ const ServiceToDo = () => {
 
     //Send updated data to the DB
     axios
-      .put(`http://localhost:3000/booking_details/${id}`, {
+      .put(`https://fixitron-server.vercel.app/booking_details/${id}`, {
         serviceStatus: updatedStatus,
       })
       .then((res) => {

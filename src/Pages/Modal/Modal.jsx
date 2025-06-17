@@ -35,7 +35,7 @@ const Modal = ({ ServiceDetails }) => {
 
     //send data to server
     axios
-      .post("http://localhost:3000/booking_details", allBooking)
+      .post("https://fixitron-server.vercel.app/booking_details", allBooking)
       .then((result) => {
         if (result.data.insertedId) {
           Swal.fire({

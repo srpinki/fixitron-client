@@ -5,6 +5,7 @@ import heroBg from "../../assets/lottie/hero-bg.json";
 import Lottie from "lottie-react";
 import heroImg from "/hero-img.jpg";
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 
 const Hero = () => {
   return (
@@ -50,12 +51,9 @@ const Hero = () => {
             transition={{ duration: 0.7, ease: "backOut" }}
             className="flex gap-4"
           >
-            <button className="btn bg-orange-500 hover:bg-orange-600 text-white">
+            <Link to={"/all-services"}><button className="btn bg-orange-500 hover:bg-orange-600 text-white">
               View Services
-            </button>
-            <button className="btn bg-base-100 text-gray-700">
-              Learn More
-            </button>
+            </button></Link>
           </motion.div>
 
           {/* Features Row */}

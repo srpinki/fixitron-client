@@ -9,7 +9,7 @@ const AllServices = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/services?serachParams=${search}`)
+    fetch(`https://fixitron-server.vercel.app/services?serachParams=${search}`)
     .then((res) => res.json())
     .then((data) => setServices(data))
     .catch((error) => {

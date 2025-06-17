@@ -10,15 +10,19 @@ const BookedServices = () => {
   const [booked, setBookings] = useState([]);
 
   useEffect(() => {
-    if (user?.email) {
-      fetch("http://localhost:3000/booking_details")
+    if (user?.email && user?.accessToken) {
+      fetch(`https://fixitron-server.vercel.app/booking_details?email=${user.email}`, {
+        headers: {
+          authorization: `Bearer ${user?.accessToken}`,
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           const filtered = data.filter((p) => p.user_email === user.email);
           setBookings(filtered);
         });
     }
-  }, [user?.email]);
+  }, [user?.email, user?.accessToken]);
 
   return (
     <div className="w-11/12 mx-auto py-18">

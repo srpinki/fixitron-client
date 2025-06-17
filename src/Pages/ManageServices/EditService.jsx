@@ -1,13 +1,15 @@
 import axios from "axios";
-import React from "react";
 import { useLoaderData, useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../AuthProvider/Context";
+import { use } from "react";
 
 const EditService = () => {
   const services = useLoaderData();
   const { id } = useParams();
+  const {user} = use(AuthContext);
   const serviceUpdate = services.find((service) => service._id == id);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     _id,
     photo_url,
@@ -22,27 +24,30 @@ const EditService = () => {
     const form = e.target;
     const formData = new FormData(form);
     const updatedService = Object.fromEntries(formData.entries());
-    
 
-//send updated data to the db
- axios.put(`http://localhost:3000/services/${_id}`, updatedService)
-  .then((res) => {
-    const data = res.data;
-    if (data.modifiedCount) {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Service updated successfully",
-        showConfirmButton: false,
-        timer: 1500,
+    //send updated data to the db
+    axios
+      .put(`https://fixitron-server.vercel.app/services/${_id}`, updatedService, {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      })
+      .then((res) => {
+        const data = res.data;
+        if (data.modifiedCount) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Service updated successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/manage-services", { replace: true });
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating service:", error);
       });
-      navigate("/manage-services", { replace: true });
-    }
-  })
-  .catch((error) => {
-    console.error("Error updating service:", error);
-  });
-
   };
 
   return (

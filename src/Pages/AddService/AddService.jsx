@@ -5,7 +5,7 @@ import { AuthContext } from "../../AuthProvider/Context";
 import DocumentTitle from "../Shared/DocumentTitle";
 
 const AddService = () => {
-  DocumentTitle("Add a Service | Fixitron - Offer Your Skills")
+  DocumentTitle("Add a Service | Fixitron - Offer Your Skills");
   const { user } = use(AuthContext);
 
   const handleAddService = (e) => {
@@ -21,9 +21,10 @@ const AddService = () => {
       providerImage: user?.photoURL,
     };
 
+    
     //send data to server
     axios
-      .post("http://localhost:3000/services", fullServiceData)
+      .post("https://fixitron-server.vercel.app/services", fullServiceData )
       .then((result) => {
         if (result.data.insertedId) {
           Swal.fire({
