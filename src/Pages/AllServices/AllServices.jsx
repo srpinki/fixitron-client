@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import AllServicesCard from "./AllServicesCard";
 import DocumentTitle from "../Shared/DocumentTitle";
+import Loading from "../Loading/Loading";
 
 const AllServices = () => {
   DocumentTitle("All Services | Fixitron - Explore & Book Services");
@@ -16,6 +17,10 @@ const AllServices = () => {
       console.error("Error fetching services:", error); 
     });
   }, [search]);
+
+  if (services.length == 0) {
+    return <Loading></Loading>
+  }
 
   return (
     <div className="bg-base-100 p-6 sm:p-10 w-11/12 mx-auto">

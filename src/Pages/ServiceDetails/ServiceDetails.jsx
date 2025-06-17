@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
   FaAward,
   FaBolt,
@@ -12,12 +12,16 @@ import {
 import { useLoaderData, useParams } from "react-router";
 import Modal from "../Modal/Modal";
 import DocumentTitle from "../Shared/DocumentTitle";
+import { AuthContext } from "../../AuthProvider/Context";
+
 
 const ServiceDetails = () => {
+  const { id } = useParams();
 
   const services = useLoaderData();
-  const { id } = useParams();
+
   const ServiceDetails = services.find((service) => service._id == id);
+  
   const {
     photo_url,
     service_name,
@@ -165,6 +169,7 @@ const ServiceDetails = () => {
       </div>
       <Modal ServiceDetails={ServiceDetails}/>
     </div>
+
   );
 };
 
