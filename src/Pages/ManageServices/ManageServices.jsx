@@ -72,7 +72,8 @@ const ManageServices = () => {
       <p>Edit, update, or remove your service offerings</p>
 
       <div>
-        {services.map((service) => (
+        {services.length > 0 ? 
+        (services.map((service) => (
           <div
             key={service._id}
             className="bg-white shadow-md rounded-lg p-4 border border-gray-200 mb-4 mt-8"
@@ -123,7 +124,8 @@ const ManageServices = () => {
               </div>
             </div>
           </div>
-        ))}
+        ))) : <p className="text-center text-gray-500 mt-4 font-bold text-2xl">You haven't add any services yet.</p>}
+         
       </div>
     </div>
   );

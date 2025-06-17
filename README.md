@@ -1,12 +1,31 @@
-# React + Vite
+# ⚙️ Fixitron - Service Sharing Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 **Live Site:** [https://fixitron.web.app](https://fixitron.web.app)
 
-Currently, two official plugins are available:
+## 📁 Category: Service Sharing Website
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Fixitron is a modern, user-friendly platform built to connect users with professional service providers. Whether you're offering a skill or looking to hire an expert, Fixitron streamlines the experience with a clean interface, intuitive navigation, and smooth animations.
 
-## Expanding the ESLint configuration
+### 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🛠 **Service Listing & Booking:** Users can explore, filter, and book services easily.
+- 🔐 **Secure Authentication:** Firebase-based login with email/password and social login support.
+- 💬 **Interactive UI:** Built with Tailwind CSS and DaisyUI for a seamless and responsive design.
+- 🎞 **Smooth Animations:** Framer Motion and Lottie animations enhance user experience with dynamic transitions.
+- 📍 **Dynamic Routing:** Integrated with React Router for fast and organized page navigation.
+- 🛡️ **Sweet Alerts:** Provides user-friendly pop-ups for confirmation, alerts, and more.
+- ☁️ **Database Integration:** Firebase for authentication and MongoDB for persistent data storage.
+- 🌐 **Responsive Design:** Fully mobile-optimized for access on all screen sizes.
+
+---
+
+### 🛠 Tech Stack
+
+- **Frontend:** React, Tailwind CSS, DaisyUI, React Icons, Framer Motion, Lottie-react
+- **Routing:** React Router
+- **Alerts & Popups:** SweetAlert2
+- **Authentication:** Firebase Auth
+- **Database:** MongoDB
+- **Hosting:** Firebase Hosting
+
+
