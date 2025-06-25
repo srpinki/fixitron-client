@@ -1,6 +1,6 @@
 # ⚙️ Fixitron - Service Sharing Platform
 
-🔗 **Live Site:** [https://fixitron.web.app]([https://fixitron.web.app](https://splendorous-snickerdoodle-eea73d.netlify.app/))
+🔗 **Live Site:** [https://fixitron.web.app]([https://fixitron.web.app](https://splendorous-snickerdoodle-eea73d.netlify.app/)
 
 ## 📁 Category: Service Sharing Website
 
