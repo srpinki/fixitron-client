@@ -1,12 +1,13 @@
 import React, { use, useEffect, useState } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { Link, NavLink } from "react-router";
-import logo from "/logo.png";
+import logo from "/fixitron-logo.png";
 import { MdManageHistory, MdOutlineArrowDropUp } from "react-icons/md";
 import { AuthContext } from "../../AuthProvider/Context";
 import { IoMdAdd } from "react-icons/io";
 import { SlCalender } from "react-icons/sl";
 import { LuListTodo } from "react-icons/lu";
+import DarkModeToggle from "./DarkModeToggle";
 
 const Header = () => {
   const { user, logOut } = use(AuthContext);
@@ -41,6 +42,8 @@ const Header = () => {
       {" "}
       <NavLink to={"/"}>Home</NavLink>
       <NavLink to={"/all-services"}>All Services</NavLink>
+      <NavLink to={"/about"}>About Us</NavLink>
+      <NavLink to={"/contact"}>Contact Us</NavLink>
       {user ? (
         <div className="flex flex-col md:flex-row items-baseline md:items-center space-x-2 space-y-2 md:space-y-0">
           <div className="dropdown dropdown-start">
@@ -106,7 +109,7 @@ const Header = () => {
     </>
   );
   return (
-    <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-sm">
+    <div className="fixed top-0 left-0 w-full z-50 bg-base-100 shadow-sm">
       <div className="w-11/12 mx-auto navbar">
         <div className="flex-1 flex items-center">
           <Link
@@ -116,12 +119,12 @@ const Header = () => {
             <img src={logo} alt="" />
           </Link>
           <div className="dropdown header">
-            <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
-              <FaBarsStaggered color="#1E293B" />
+            <div tabIndex={0} role="button" className="text-balance btn btn-ghost md:hidden">
+              <FaBarsStaggered />
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content text-balance bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {link}
             </ul>
@@ -129,7 +132,7 @@ const Header = () => {
         </div>
         <div className="flex-none">
           <div className="navbar-center hidden md:flex">
-            <ul className="menu items-center gap-5 menu-horizontal px-1 text-secondary text-base">
+            <ul className="menu items-center gap-5 menu-horizontal px-1 text-balance text-base">
               {link}
             </ul>
           </div>
@@ -140,7 +143,8 @@ const Header = () => {
             <img src={logo} alt="" />
           </Link>
         </div>
-              {/* darkmode toggle */}
+
+      {/* darkmode toggle */}
 
       <label className="swap swap-rotate ">
         {/* this hidden checkbox controls the state */}
@@ -168,6 +172,7 @@ const Header = () => {
           <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
         </svg>
       </label>
+
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const PopularServices = ({ servicesPromise }) => {
   const services = [...allServices].reverse().slice(0, 6)
 
   return (
-    <div className="py-20 bg-[#f9fafb]">
+    <div className="py-20 bg-base-200">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -20,10 +20,10 @@ const PopularServices = ({ servicesPromise }) => {
         <button className=" mb-4 badge text-primary p-4 rounded-full bg-[#f8ede4]">
           Most Popular
         </button>
-        <h2 className="text-3xl md:text-5xl font-bold mb-4 text-secondary">
+        <h2 className="text-3xl md:text-5xl font-bold mb-4">
           Popular Services
         </h2>
-        <p className="text-gray-500 max-w-2xl mx-auto">
+        <p className="text-base-content max-w-2xl mx-auto">
           Discover our most requested electronic repair services from certified
           professionals
         </p>

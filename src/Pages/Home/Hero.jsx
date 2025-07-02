@@ -35,7 +35,7 @@ const Hero = () => {
               <span className="text-primary">Electronic Repair </span>
               Services
             </h1>
-            <p className="text-orange-400 font-semibold">
+            <p className="text-primary font-semibold">
               Expert technicians, quality parts, and fast turnaround times
             </p>
             <p className="text-gray-300">

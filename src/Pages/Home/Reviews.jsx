@@ -35,12 +35,12 @@ const cardVariants = {
 };
 
 const Review = () => (
-  <div className="bg-[#f9fafb] py-20 text-center px-4 ">
+  <div className="py-20 text-center px-4 bg-base-200">
     <motion.h2
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="text-3xl md:text-5xl font-bold text-neutral"
+      className="text-3xl md:text-5xl font-bold "
     >
       What Our Customers Say
     </motion.h2>
@@ -69,7 +69,7 @@ const Review = () => (
               <FaStar key={i} />
             ))}
           </div>
-          <p className="italic text-base-content mb-4">"{review.message}"</p>
+          <p className="italic mb-4 text-neutral">"{review.message}"</p>
           <div className="flex items-center gap-4">
             <img
               src={review.img}
@@ -78,7 +78,7 @@ const Review = () => (
             />
             <div>
               <p className="font-semibold text-neutral">{review.name}</p>
-              <p className="text-sm text-base-content">{review.role}</p>
+              <p className="text-sm text-neutral">{review.role}</p>
             </div>
           </div>
         </motion.div>

@@ -41,7 +41,7 @@ const WhyChooseFixitron = () => {
   return (
     <div className="text-center py-20 bg-base-100 w-11/12 mx-auto">
       <motion.h2
-        className="text-3xl md:text-5xl font-bold text-neutral"
+        className="text-3xl md:text-5xl font-bold"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -72,7 +72,7 @@ const WhyChooseFixitron = () => {
             <div className="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
               {card.icon}
             </div>
-            <h3 className="text-lg font-semibold text-neutral">{card.title}</h3>
+            <h3 className="text-lg font-semibold">{card.title}</h3>
             <p className="text-sm text-base-content mt-2">{card.description}</p>
           </motion.div>
         ))}

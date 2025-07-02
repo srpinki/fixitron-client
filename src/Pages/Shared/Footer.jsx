@@ -94,10 +94,10 @@ const Footer = () => {
       <div className="mt-10 border-t border-gray-700 pt-4 text-sm text-center text-gray-400">
         © 2025 Fixitron. All rights reserved.
         <div className="mt-2 space-x-4">
-          <a href="#" className="hover:text-white">
+          <a href="/privacy-policy" className="hover:text-white">
             Privacy Policy
           </a>
-          <a href="#" className="hover:text-white">
+          <a href="/terms" className="hover:text-white">
             Terms of Service
           </a>
         </div>

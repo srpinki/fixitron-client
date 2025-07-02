@@ -16,6 +16,10 @@ import ManageServices from "../Pages/ManageServices/ManageServices";
 import EditService from "../Pages/ManageServices/EditService";
 import BookedServices from "../Pages/BookedServices/BookedServices";
 import ServiceToDo from "../Pages/ServiceToDo/ServiceToDo";
+import About from "../Pages/About/About";
+import ContactUs from "../Pages/Contact/ContactUs";
+import PrivacyPolicy from "../Pages/PrivacyPolicyy/PrivacyPolicy ";
+import TermsOfService from "../Pages/TermsOfServicee/TermsOfService ";
 
 
 const router = createBrowserRouter([
@@ -26,6 +30,14 @@ const router = createBrowserRouter([
         {
             index: true,
             Component: Home
+        },
+        {
+          path: '/about',
+          Component: About
+        },
+        {
+          path: '/contact',
+          Component: ContactUs
         },
         {
             path: "/all-services",
@@ -56,6 +68,14 @@ const router = createBrowserRouter([
         {
           path: "/service-todo",
           element: <PrivateRoute><ServiceToDo></ServiceToDo></PrivateRoute>
+        },
+        {
+          path: "/privacy-policy",
+          Component: PrivacyPolicy,
+        },
+        {
+          path: "/terms",
+          Component: TermsOfService,
         }
     ]
   },
