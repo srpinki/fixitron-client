@@ -1,7 +1,7 @@
 import React, { use, useEffect, useState } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { Link, NavLink } from "react-router";
-import logo from "/fixitron-logo.png";
+import logo from "/footer-logo.png";
 import { MdManageHistory, MdOutlineArrowDropUp } from "react-icons/md";
 import { AuthContext } from "../../AuthProvider/Context";
 import { IoMdAdd } from "react-icons/io";
@@ -109,17 +109,17 @@ const Header = () => {
     </>
   );
   return (
-    <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-sm">
+    <div className="fixed top-0 left-0 w-full z-50 bg-secondary shadow-sm">
       <div className="w-11/12 mx-auto navbar">
         <div className="flex-1 flex items-center">
           <Link
             to={"/"}
-            className="text-2xl font-bold text-secondary hidden md:flex"
+            className="text-2xl font-bold hidden md:flex"
           >
             <img src={logo} alt="" />
           </Link>
           <div className="dropdown header">
-            <div tabIndex={0} role="button" className="text-secondary btn btn-ghost md:hidden">
+            <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
               <FaBarsStaggered />
             </div>
             <ul
@@ -132,7 +132,7 @@ const Header = () => {
         </div>
         <div className="flex-none">
           <div className="navbar-center hidden md:flex">
-            <ul className="menu items-center gap-5 menu-horizontal px-1 text-secondary text-base">
+            <ul className="menu items-center gap-5 menu-horizontal px-1 text-primary bg-secondary">
               {link}
             </ul>
           </div>
