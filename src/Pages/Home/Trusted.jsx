@@ -5,7 +5,7 @@ import { FaUsers, FaStar, FaClock, FaShieldAlt } from "react-icons/fa";
 const Trusted = () => {
   return (
     <section className="bg-secondary text-white py-16 px-6">
-      <div className="max-w-6xl mx-auto text-center">
+      <div className="w-11/12 mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}

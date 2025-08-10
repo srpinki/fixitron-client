@@ -53,7 +53,7 @@ const Review = () => (
       Don’t just take our word for it – hear from our satisfied customers
     </motion.p>
 
-    <div className="grid gap-6 md:grid-cols-3 max-w-7xl mx-auto">
+    <div className="grid gap-6 md:grid-cols-3 w-11/12 mx-auto">
       {reviews.map((review, idx) => (
         <motion.div
           key={idx}

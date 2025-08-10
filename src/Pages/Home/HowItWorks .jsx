@@ -9,7 +9,7 @@ import {
 const HowItWorks = () => {
   return (
     <section className="py-20 bg-base-200 text-center px-4">
-      <div className="max-w-5xl mx-auto">
+      <div className="w-11/12 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
