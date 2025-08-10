@@ -8,7 +8,7 @@ import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 const Footer = () => {
   return (
     <footer className="bg-secondary text-gray-200 py-10">
-      <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8">
         <div>
           <div className="flex items-center mb-4">
             <Link to="/" className="text-2xl font-bold text-primary">
@@ -41,7 +41,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div>
+        {/* <div>
           <h3 className="text-white font-semibold mb-3">Popular Services
 </h3>
           <ul className="space-y-2 text-sm">
@@ -66,7 +66,7 @@ const Footer = () => {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
 
         {/* Contact */}
         <div>
