@@ -105,10 +105,10 @@ const AllServices = () => {
     <div className="bg-base-100 p-6 sm:p-10 w-11/12 mx-auto my-8">
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto mb-6">
-        <h1 className="text-3xl sm:text-4xl font-bold text-neutral">
+        <h1 className="text-3xl sm:text-4xl font-bold">
           All Electronic Repair Services
         </h1>
-        <p className="text-gray-500 mt-2">
+        <p className="text-accent mt-2">
           Browse our complete collection of professional electronic repair
           services from certified technicians
         </p>
@@ -121,7 +121,7 @@ const AllServices = () => {
       >
         {/* Search input + submit */}
         <div className="relative w-full sm:max-w-lg">
-          <FaSearch className="absolute left-3 top-3 text-gray-400 text-lg z-10" />
+          <FaSearch className="absolute left-3 top-3 text-accent text-lg z-10" />
           <input
             value={queryInput}
             onChange={(e) => setQueryInput(e.target.value)}
@@ -170,7 +170,7 @@ const AllServices = () => {
 
       {/* Grid: 1 column mobile, 2 cols small, 3 cols large */}
       {services.length === 0 ? (
-        <div className="p-8 text-center text-gray-500 rounded-lg border border-dashed">
+        <div className="p-8 text-center rounded-lg border border-dashed">
           No services found. Try a different search or clear filters.
         </div>
       ) : (

@@ -30,11 +30,11 @@ const AllServicesCard = ({ service }) => {
       {/* Card body */}
       <div className="card-body">
         <h2 className="card-title text-lg sm:text-xl">{service_name}</h2>
-        <p className="text-sm text-gray-600 truncate max-w-[ch_100]">
+        <p className="text-sm text-accent truncate max-w-[ch_100]">
           {service_description}
         </p>
-        <div className="flex items-center gap-2 text-sm text-gray-500 mt-2">
-          <FaMapMarkerAlt className="text-gray-400" />
+        <div className="flex items-center gap-2 text-sm text-accent mt-2">
+          <FaMapMarkerAlt className="text-accent" />
           <span>{service_area}</span>
         </div>
 
@@ -45,7 +45,7 @@ const AllServicesCard = ({ service }) => {
               alt={providerName}
               className="w-8 h-8 rounded-full"
             />
-            <p className="text-sm text-gray-700">{providerName}</p>
+            <p className="text-sm text-accent">{providerName}</p>
           </div>
           <Link to={`/service-details/${_id}`}>
             <button className="bg-orange-500 text-white px-4 py-2 text-sm rounded hover:bg-orange-600 cursor-pointer">

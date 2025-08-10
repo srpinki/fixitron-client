@@ -65,7 +65,7 @@ const Modal = ({ ServiceDetails }) => {
             <div className="bg-white rounded-xl ">
               <div className="flex items-center gap-2 mb-4">
                 <FaCalendarAlt className="text-orange-500" />
-                <h2 className="text-3xl font-bold">Book Your Service</h2>
+                <h2 className="text-3xl font-bold text-secondary">Book Your Service</h2>
               </div>
               <p className="text-sm text-gray-500 mb-6">
                 Complete your booking details below

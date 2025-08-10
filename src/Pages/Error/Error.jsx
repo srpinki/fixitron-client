@@ -15,7 +15,7 @@ const Error = () => {
       <h2 className="text-2xl font-semibold mb-2">Oops! Page not found.</h2>
 
       <div className="flex gap-4 flex-wrap justify-center">
-        <Link to="/" className="btn bg-primary text-white px-6">
+        <Link to="/" className="btn bg-orange-500 text-white px-6">
           Go Home
         </Link>
       </div>
