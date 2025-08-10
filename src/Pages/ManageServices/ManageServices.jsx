@@ -89,11 +89,11 @@ const ManageServices = () => {
                   />
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold">{service.service_name}</h2>
+                  <h2 className="text-lg font-bold text-secondary">{service.service_name}</h2>
                   <p className="text-sm text-gray-500">
                     {service.service_area}
                   </p>
-                  <p className="truncate w-80">{service.service_description}</p>
+                  <p className="truncate w-80 text-gray-500">{service.service_description}</p>
                 </div>
               </div>
             </div>
@@ -101,8 +101,8 @@ const ManageServices = () => {
             {/* Footer */}
             <div className="flex justify-between items-center mt-4">
               <div className="text-sm">
-                <div className="font-semibold text-orange-600">Price</div>
-                <div className="text-lg font-bold">
+                <div className="font-semibold text-primary">Price</div>
+                <div className="text-lg font-bold text-secondary">
                   ${service.service_price}
                 </div>
               </div>

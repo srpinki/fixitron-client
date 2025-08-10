@@ -42,12 +42,12 @@ const AddService = () => {
   };
 
   return (
-    <div className="bg-[#f8fafc] py-20">
+    <div className="bg-base-200 py-20">
       <div className="max-w-2xl mx-auto px-4 py-10 bg-white shadow-sm border rounded-xl border-[#e2e8f0] ">
         <h2 className="text-3xl font-bold text-center text-neutral">
           Add New Service
         </h2>
-        <p className="text-center text-base-content mt-2 mb-8">
+        <p className="text-center text-secondary mt-2 mb-8">
           Create a new electronic repair service offering
         </p>
 
@@ -55,7 +55,7 @@ const AddService = () => {
           {/* Image URL */}
           <div>
             <label className="label font-semibold">
-              <span className="label-text">Service Image URL</span>
+              <span className="label-text text-secondary">Service Image URL</span>
             </label>
             <input
               type="text"
@@ -68,7 +68,7 @@ const AddService = () => {
           {/* Service Name */}
           <div>
             <label className="label font-semibold">
-              <span className="label-text">
+              <span className="label-text text-secondary">
                 Service Name <span className="text-error">*</span>
               </span>
             </label>
@@ -84,7 +84,7 @@ const AddService = () => {
           {/* Price */}
           <div>
             <label className="label font-semibold">
-              <span className="label-text">
+              <span className="label-text text-secondary">
                 Price ($) <span className="text-error">*</span>
               </span>
             </label>
@@ -100,7 +100,7 @@ const AddService = () => {
           {/* Service Area */}
           <div>
             <label className="label font-semibold">
-              <span className="label-text">
+              <span className="label-text text-secondary">
                 Service Area <span className="text-error">*</span>
               </span>
             </label>
@@ -116,7 +116,7 @@ const AddService = () => {
           {/* Description */}
           <div>
             <label className="label font-semibold">
-              <span className="label-text">
+              <span className="label-text text-secondary">
                 Description <span className="text-error">*</span>
               </span>
             </label>
@@ -133,7 +133,7 @@ const AddService = () => {
           <div>
             <button
               type="submit"
-              className="btn btn-block bg-orange-500 hover:bg-orange-600 text-white font-semibold"
+              className="btn btn-block bg-orange-500 hover:bg-orange-600 text-white font-semibold "
             >
               Add Service
             </button>

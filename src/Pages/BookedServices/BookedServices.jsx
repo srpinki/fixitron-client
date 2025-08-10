@@ -34,7 +34,7 @@ const BookedServices = () => {
         (booked.map((book) => (
           <div
             key={book._id}
-            className="card bg-white shadow-md border border-gray-200 rounded-lg p-4"
+            className="bg-white shadow-md rounded-lg p-4 border border-gray-200 mb-4 mt-8"
           >
             <div className="flex justify-between items-start">
               {/* Image and Basic Info */}
@@ -47,15 +47,15 @@ const BookedServices = () => {
                   />
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold">{book.service_name}</h2>
-                  <p className="text-orange-600 font-semibold">
+                  <h2 className="text-lg font-bold text-secondary">{book.service_name}</h2>
+                  <p className="text-primary font-semibold">
                     ${book.service_price}
                   </p>
                 </div>
               </div>
 
               {/* Status */}
-              <div className="badge badge-warning badge-outline">
+              <div className="badge badge-warning badge-outline text-secondary">
                 {book.serviceStatus}
               </div>
             </div>
@@ -65,21 +65,21 @@ const BookedServices = () => {
               <div className="space-y-1">
                 <p className="flex items-center gap-2 text-sm">
                   <FaUser className="text-gray-500" />
-                  <span>
+                  <span className="text-secondary">
                     <span className="font-semibold">Provider:</span>{" "}
                     {book.providerName}
                   </span>
                 </p>
                 <p className="flex items-center gap-2 text-sm">
                   <FaEnvelope className="text-gray-500" />
-                  <span>
+                  <span className="text-secondary">
                     <span className="font-semibold">Provider Email:</span>{" "}
                     {book.providerEmail}
                   </span>
                 </p>
                 <p className="flex items-center gap-2 text-sm">
                   <FaCalendarAlt className="text-gray-500" />
-                  <span>
+                  <span className="text-secondary">
                     <span className="font-semibold">Service Date:</span>{" "}
                     {book.service_date}
                   </span>
@@ -88,7 +88,7 @@ const BookedServices = () => {
 
               {/* Special Instructions */}
               <div>
-                <p className="flex items-center gap-2 font-semibold mb-1">
+                <p className="flex items-center gap-2 font-semibold mb-1 text-secondary">
                   <FaRegFileAlt className="text-gray-500" />
                   Special Instructions:
                 </p>

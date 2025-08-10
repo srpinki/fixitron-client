@@ -125,7 +125,7 @@ const ServiceDetails = () => {
               alt="Provider"
             />
             <div>
-              <h4 className="text-sm font-bold flex items-center gap-1">
+              <h4 className="text-sm font-bold flex items-center gap-1 text-secondary">
                 {providerName} <FaCheckCircle className="text-green-500" />
               </h4>
               <div className="text-gray-500 text-xs flex items-center gap-2">

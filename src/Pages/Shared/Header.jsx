@@ -109,7 +109,7 @@ const Header = () => {
     </>
   );
   return (
-    <div className="fixed top-0 left-0 w-full z-50 bg-base-100 shadow-sm">
+    <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-sm">
       <div className="w-11/12 mx-auto navbar">
         <div className="flex-1 flex items-center">
           <Link
@@ -119,12 +119,12 @@ const Header = () => {
             <img src={logo} alt="" />
           </Link>
           <div className="dropdown header">
-            <div tabIndex={0} role="button" className="text-balance btn btn-ghost md:hidden">
+            <div tabIndex={0} role="button" className="text-secondary btn btn-ghost md:hidden">
               <FaBarsStaggered />
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content text-balance bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {link}
             </ul>
@@ -132,7 +132,7 @@ const Header = () => {
         </div>
         <div className="flex-none">
           <div className="navbar-center hidden md:flex">
-            <ul className="menu items-center gap-5 menu-horizontal px-1 text-balance text-base">
+            <ul className="menu items-center gap-5 menu-horizontal px-1 text-secondary text-base">
               {link}
             </ul>
           </div>

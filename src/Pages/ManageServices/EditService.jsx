@@ -52,7 +52,7 @@ const EditService = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-lg my-8">
-      <h2 className="text-2xl font-semibold text-center mb-8 flex justify-center gap-4 items-center">
+      <h2 className="text-secondary text-2xl font-semibold text-center mb-8 flex justify-center gap-4 items-center">
         Update Service
       </h2>
       <form className="space-y-6" onSubmit={handleUpdate}>

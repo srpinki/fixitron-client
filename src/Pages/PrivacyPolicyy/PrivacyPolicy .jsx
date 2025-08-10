@@ -2,8 +2,8 @@ import React from "react";
 
 const PrivacyPolicy = () => {
   return (
-    <section className="bg-white py-12 px-6 md:px-20">
-      <div className="max-w-4xl mx-auto text-gray-800">
+    <section className="bg-base-100 py-12 px-4 md:px-20">
+      <div className="w-11/12 mx-auto">
         <h1 className="text-4xl font-bold mb-6 text-center">Privacy Policy</h1>
 
         <p className="mb-4">

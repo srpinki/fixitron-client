@@ -64,7 +64,7 @@ const ServiceToDo = () => {
           booked.map((book) => (
             <div
               key={book._id}
-              className="card bg-white shadow-md border border-gray-200 rounded-lg p-4"
+              className="bg-white shadow-md rounded-lg p-4 border border-gray-200 mb-4 mt-8"
             >
               <div className="flex justify-between items-start">
                 {/* Image and Basic Info */}
@@ -77,24 +77,24 @@ const ServiceToDo = () => {
                     />
                   </div>
                   <div className="space-y-1">
-                    <h2 className="text-lg font-bold">{book.service_name}</h2>
+                    <h2 className="text-lg font-bold text-secondary">{book.service_name}</h2>
                     <p className="flex items-center gap-2 text-sm">
                       <FaUser className="text-gray-500" />
-                      <span>
+                      <span className="text-secondary">
                         <span className="font-semibold">Customer:</span>{" "}
                         {book.user_name}
                       </span>
                     </p>
                     <p className="flex items-center gap-2 text-sm">
                       <FaEnvelope className="text-gray-500" />
-                      <span>
+                      <span className="text-secondary">
                         <span className="font-semibold">Customer Email:</span>{" "}
                         {book.user_email}
                       </span>
                     </p>
                     <p className="flex items-center gap-2 text-sm">
                       <FaCalendarAlt className="text-gray-500" />
-                      <span>
+                      <span className="text-secondary">
                         <span className="font-semibold">Service Date:</span>{" "}
                         {book.service_date}
                       </span>
@@ -112,7 +112,7 @@ const ServiceToDo = () => {
               <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <div>
-                    <p>Service Price</p>
+                    <p className="text-secondary">Service Price</p>
                     <p className="text-orange-600 font-semibold text-2xl">
                       ${book.service_price}
                     </p>
@@ -120,7 +120,7 @@ const ServiceToDo = () => {
 
                   {/* Special Instructions */}
                   <div>
-                    <p className="flex items-center gap-2 font-semibold mb-1">
+                    <p className="flex items-center gap-2 font-semibold mb-1 text-secondary">
                       <FaRegFileAlt className="text-gray-500" />
                       Special Instructions:
                     </p>
@@ -133,7 +133,7 @@ const ServiceToDo = () => {
                 {/* Right Side */}
                 <div>
                   <div className="form-control w-full">
-                    <label className="label font-semibold">Update Status</label>
+                    <label className="label font-semibold text-secondary">Update Status</label>
                     <select
                       className="select select-bordered focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 w-full"
                       defaultValue={book.serviceStatus}

@@ -80,7 +80,7 @@ const Modal = ({ ServiceDetails }) => {
                   </div>
                   <div className="flex-1 space-y-2 ">
                     <div>
-                      <label className="text-sm font-semibold">
+                      <label className="text-sm font-semibold text-secondary">
                         Service ID
                       </label>
                       <input
@@ -92,7 +92,7 @@ const Modal = ({ ServiceDetails }) => {
                       />
                     </div>
                     <div>
-                      <label className="text-sm font-semibold">
+                      <label className="text-sm font-semibold text-secondary">
                         Service Name
                       </label>
                       <input
@@ -193,7 +193,7 @@ const Modal = ({ ServiceDetails }) => {
             </div>
 
             {/* Booking section */}
-            <div className="bg-white rounded-xl p-6 shadow-xl border border-gray-200">
+            <div className="bg-white rounded-xl p-6 shadow-xl border border-gray-200 mt-5">
               {/* Header */}
               <div className="flex items-center gap-2 text-orange-500 font-semibold text-lg mb-4">
                 <FaCalendarAlt />
@@ -203,7 +203,7 @@ const Modal = ({ ServiceDetails }) => {
               {/* Service Date and Price */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                 <div className="form-control w-full sm:w-1/2">
-                  <label className="label font-semibold">
+                  <label className="label font-semibold text-secondary">
                     <span>Service Date *</span>
                   </label>
                   <div className="relative">
@@ -235,7 +235,7 @@ const Modal = ({ ServiceDetails }) => {
 
               {/* Special Instructions */}
               <div className="form-control mb-6">
-                <label className="label font-semibold flex items-center gap-2">
+                <label className="label font-semibold flex items-center gap-2 text-secondary">
                   <FaMapMarkerAlt className="text-gray-500" />
                   <span>Special Instructions</span>
                 </label>
