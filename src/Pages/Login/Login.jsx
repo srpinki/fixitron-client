@@ -3,13 +3,13 @@ import { FaSignInAlt } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../AuthProvider/Context";
 import Swal from "sweetalert2";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import DocumentTitle from "../Shared/DocumentTitle";
+import axios from "axios";
 const Login = () => {
   DocumentTitle("Login | Fixitron - Access Your Account Easily");
   const [showPassword, setShowPassword] = useState(false);
   const { signInUser, googleSignIn } = use(AuthContext);
-  const location = useLocation();
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -49,49 +49,79 @@ const Login = () => {
           text: error.code,
         });
       });
-
-    // signInUser(email, password)
-    //   .then((result) => {
-    //     const user = result.user;
-    //     console.log(user);
-
-    //     Swal.fire({
-    //       title: "Signup successfully!",
-    //       icon: "success",
-    //       draggable: true,
-    //     });
-    //     navigate(location?.state || "/");
-    //   })
-    //   .catch((error) => {
-    //     const errorMessage = error.code;
-    //     Swal.fire({
-    //       icon: "error",
-    //       title: "Oops...",
-    //       text: errorMessage,
-    //     });
-    //   });
   };
 
-  const handleGoogleLogin = () => {
-    googleSignIn()
-      .then((result) => {
-        console.log(result);
-        Swal.fire({
-          title: "Login successfully!",
-          icon: "success",
-          draggable: true,
-        });
-        navigate(location?.state || "/");
-      })
-      .catch((error) => {
-        const errorMessage = error.code;
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: errorMessage,
-        });
-      });
-  };
+  const handleGoogleLogin = async () => {
+  try {
+    const result = await googleSignIn();
+    const user = result.user;
+
+    const userData = {
+      name: user.displayName,
+      email: user.email,
+      role: "user", // ✅ Default role
+    };
+
+    // ✅ Check if user exists
+    const checkRes = await axios.get(
+      `http://localhost:3000/users/${user.email}`
+    );
+
+    if (!checkRes.data.exists) {
+      // ✅ Only insert if not exists
+      await axios.post("http://localhost:3000/users", userData);
+    }
+
+    // ✅ Now get the role
+    const roleRes = await axios.get(
+      `http://localhost:3000/users/${user.email}`
+    );
+
+    const role = roleRes.data.role;
+
+    Swal.fire({
+      title: "Login successfully!",
+      icon: "success",
+    });
+
+    // Role অনুযায়ী redirect
+    if (role === "provider") navigate("/provider-dashboard");
+    else navigate("/user-dashboard");
+
+  } catch (error) {
+    console.log(error);
+
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: error?.response?.data?.message || error.code,
+    });
+  }
+};
+
+
+  // const handleGoogleLogin = () => {
+  //   googleSignIn()
+  //     .then((result) => {
+  //       console.log(result);
+  //       Swal.fire({
+  //         title: "Login successfully!",
+  //         icon: "success",
+  //         draggable: true,
+  //       });
+  //       navigate(location?.state || "/");
+  //     })
+  //     .catch((error) => {
+  //       const errorMessage = error.code;
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Oops...",
+  //         text: errorMessage,
+  //       });
+  //     });
+  // };
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f8fafc]">
