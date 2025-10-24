@@ -21,10 +21,9 @@ const AddService = () => {
       providerImage: user?.photoURL,
     };
 
-    
     //send data to server
     axios
-      .post("https://fixitron-server.vercel.app/services", fullServiceData )
+      .post("https://fixitron-server.vercel.app/services", fullServiceData)
       .then((result) => {
         if (result.data.insertedId) {
           Swal.fire({
@@ -55,7 +54,9 @@ const AddService = () => {
           {/* Image URL */}
           <div>
             <label className="label font-semibold">
-              <span className="label-text text-secondary">Service Image URL</span>
+              <span className="label-text text-secondary">
+                Service Image URL
+              </span>
             </label>
             <input
               type="text"
@@ -95,6 +96,35 @@ const AddService = () => {
               required
               name="service_price"
             />
+          </div>
+
+          {/* Service Category */}
+          <div>
+            <label className="label font-semibold">
+              <span className="label-text text-secondary">
+                Service Category <span className="text-error">*</span>
+              </span>
+            </label>
+            <select
+              name="service_category"
+              className="select select-bordered w-full focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100"
+              required
+            >
+              <option value="">-- Select Category --</option>
+              <option>Smartphone Repair</option>
+              <option>Laptop Repair</option>
+              <option>Gaming Console Fix</option>
+              <option>Tablet Screen Replacement</option>
+              <option>AC Replacement Servicing</option>
+              <option>Desktop PC Repair</option>
+              <option>Printer & Scanner Repair</option>
+              <option>Smartwatch Repair</option>
+              <option>Camera & Lens Repair</option>
+              <option>Home Theater Setup</option>
+              <option>Network & WiFi Setup</option>
+              <option>Data Recovery Service</option>
+              <option>Smart Home Device Setup</option>
+            </select>
           </div>
 
           {/* Service Area */}

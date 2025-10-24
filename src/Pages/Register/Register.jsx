@@ -5,61 +5,137 @@ import { AuthContext } from "../../AuthProvider/Context";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router";
 import DocumentTitle from "../Shared/DocumentTitle";
+import axios from "axios";
 
 const Register = () => {
-  DocumentTitle("Register | Fixitron - Join Our Community")
+  DocumentTitle("Register | Fixitron - Join Our Community");
   const [showPassword, setShowPassword] = useState(false);
   const { createUser, googleSignIn, updateUser, setUser } = use(AuthContext);
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleSignup = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const name = formData.get("name");
-    const photo = formData.get("photo");
+  // const handleSignup = (e) => {
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const formData = new FormData(form);
+  //   const email = formData.get("email");
+  //   const password = formData.get("password");
+  //   const name = formData.get("name");
+  //   const photo = formData.get("photo");
 
-    createUser(email, password)
-      .then((result) => {
-        const user = result.user;
-        updateUser({ displayName: name, photoURL: photo })
-          .then(() => {
-            setUser({ ...user, displayName: name, photoURL: photo });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+  //   const role = formData.get("role");
+  //   console.log("Role selected:", role);
 
-        Swal.fire({
-          title: "Signup successfully!",
-          icon: "success",
-          draggable: true,
-        });
-        navigate(location?.state || "/");
-      })
-      .catch((error) => {
-        const errorMessage = error.code;
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: errorMessage,
-        });
-      });
+  //   // Validate role
+  //   if (!role) {
+  //     setError("Please select a role");
+  //     return;
+  //   }
 
-    //password validate
-    const passwordRegExp = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
-    if (passwordRegExp.test(password) === false) {
-      setError(
-        "Password must have one uppercase, one lowercase, and 6 characters or longer"
-      );
-      return;
-    }
-  };
+  //   // Firebase Auth দিয়ে ইউজার তৈরি
+  //   createUser(email, password)
+  //     .then(async (result) => {
+  //       const user = result.user;
+  //       await updateUser({ displayName: name, photoURL: photo });
+  //       setUser({ ...user, displayName: name, photoURL: photo });
 
+  //       // MongoDB তে ইউজার + role save
+  //       await fetch("http://localhost:3000/signup", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({ name, email, role }),
+  //       });
+        
+  //       Swal.fire({
+  //         title: "Signup successfully!",
+  //         icon: "success",
+  //         draggable: true,
+  //       });
+
+  //       // Role অনুযায়ী redirect
+  //       if (role === "provider") navigate("/provider-dashboard");
+  //       else navigate("/user-dashboard");
+  //     })
+  //     .catch((error) => {
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Oops...",
+  //         text: error.code,
+  //       });
+  //     });
+  //  //password validate
+  //   const passwordRegExp = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+  //   if (passwordRegExp.test(password) === false) {
+  //     setError(
+  //       "Password must have one uppercase, one lowercase, and 6 characters or longer"
+  //     );
+  //     return;
+  //   }
+  // };
+
+  const handleSignup = async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+  const email = formData.get("email");
+  const password = formData.get("password");
+  const name = formData.get("name");
+  const photo = formData.get("photo");
+  const role = formData.get("role");
+
+  console.log("Role selected:", role);
+
+  // Validate role
+  if (!role) {
+    setError("Please select a role");
+    return;
+  }
+
+  // Password validation first
+  const passwordRegExp = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+  if (!passwordRegExp.test(password)) {
+    setError(
+      "Password must have one uppercase, one lowercase, and 6 characters or longer"
+    );
+    return;
+  }
+
+  try {
+    // Firebase Auth দিয়ে ইউজার তৈরি
+    const result = await createUser(email, password);
+    const user = result.user;
+
+    await updateUser({ displayName: name, photoURL: photo });
+    setUser({ ...user, displayName: name, photoURL: photo });
+
+    // MongoDB তে ইউজার + role save (Axios)
+    const response = await axios.post("http://localhost:3000/signup", {
+      name,
+      email,
+      role,
+    });
+
+    console.log("MongoDB response:", response.data);
+
+    Swal.fire({
+      title: "Signup successfully!",
+      icon: "success",
+      draggable: true,
+    });
+
+    // Role অনুযায়ী redirect
+    if (role === "provider") navigate("/provider-dashboard");
+    else navigate("/user-dashboard");
+  } catch (error) {
+    console.log("Signup error:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: error.response?.data?.message || error.message,
+    });
+  }
+};
   const handleGoogleLogin = () => {
     googleSignIn()
       .then((result) => {
@@ -125,6 +201,20 @@ const Register = () => {
               className="input input-bordered w-full focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100 focus:outline-none"
               name="photo"
             />
+          </div>
+
+          <div className="form-control mb-4">
+            <label className="label">
+              <span className="label-text font-medium">Role</span>
+            </label>
+            <select
+              name="role"
+              className="input input-bordered w-full focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-base-100 focus:outline-none"
+            >
+              <option value="">Select Role</option>
+              <option value="user">User</option>
+              <option value="provider">Provider</option>
+            </select>
           </div>
 
           <div className="form-control mb-4">

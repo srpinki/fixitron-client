@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router";
 import DocumentTitle from "../Shared/DocumentTitle";
 const Login = () => {
-  DocumentTitle("Login | Fixitron - Access Your Account Easily")
+  DocumentTitle("Login | Fixitron - Access Your Account Easily");
   const [showPassword, setShowPassword] = useState(false);
   const { signInUser, googleSignIn } = use(AuthContext);
   const location = useLocation();
@@ -19,25 +19,57 @@ const Login = () => {
     const password = e.target.password.value;
 
     signInUser(email, password)
-      .then((result) => {
+      .then(async (result) => {
         const user = result.user;
-        console.log(user);
+
+        // MongoDB থেকে role fetch
+        const res = await fetch(`http://localhost:3000/users/role`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${await user.getIdToken()}`,
+          },
+        });
+        const data = await res.json();
+        const role = data.role;
 
         Swal.fire({
-          title: "Signup successfully!",
+          title: "Login successfully!",
           icon: "success",
           draggable: true,
         });
-        navigate(location?.state || "/");
+
+        // Role অনুযায়ী redirect
+        if (role === "provider") navigate("/provider-dashboard");
+        else navigate("/user-dashboard");
       })
       .catch((error) => {
-        const errorMessage = error.code;
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: errorMessage,
+          text: error.code,
         });
       });
+
+    // signInUser(email, password)
+    //   .then((result) => {
+    //     const user = result.user;
+    //     console.log(user);
+
+    //     Swal.fire({
+    //       title: "Signup successfully!",
+    //       icon: "success",
+    //       draggable: true,
+    //     });
+    //     navigate(location?.state || "/");
+    //   })
+    //   .catch((error) => {
+    //     const errorMessage = error.code;
+    //     Swal.fire({
+    //       icon: "error",
+    //       title: "Oops...",
+    //       text: errorMessage,
+    //     });
+    //   });
   };
 
   const handleGoogleLogin = () => {

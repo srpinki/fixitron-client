@@ -32,13 +32,9 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logOut = () => {
-    return signOut(auth);
-  };
+  const logOut = () => signOut(auth);
 
-  const updateUser = (updatedData) => {
-    return updateProfile(auth.currentUser, updatedData);
-  };
+  const updateUser = (updatedData) => updateProfile(auth.currentUser, updatedData);
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -46,9 +42,7 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
     });
-    return () => {
-      unSubscribe();
-    };
+    return () => unSubscribe();
   }, []);
 
   const userInfo = {
@@ -59,8 +53,10 @@ const AuthProvider = ({ children }) => {
     loading,
     updateUser,
     logOut,
+    setUser, // Optional: provide setUser if you want to update manually
   };
-  return <AuthContext value={userInfo}>{children}</AuthContext>;
+
+  return <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;
