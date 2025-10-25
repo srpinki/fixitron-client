@@ -20,6 +20,7 @@ import PrivacyPolicy from "../Pages/PrivacyPolicyy/PrivacyPolicy ";
 import TermsOfService from "../Pages/TermsOfServicee/TermsOfService ";
 import ProviderDashboard from "../Pages/Dashboard/ProviderDashboard ";
 import UserDashboard from "../Pages/Dashboard/UserDashboard ";
+import DashboardLayout from "../Pages/Layouts/DashboardLayout";
 
 const router = createBrowserRouter([
   {
@@ -43,30 +44,6 @@ const router = createBrowserRouter([
         Component: AllServices,
       },
       {
-        path: "/add-service",
-        element: (
-          <PrivateRoute>
-            <AddService></AddService>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/provider-dashboard",
-        element: (
-          <PrivateRoute>
-            <ProviderDashboard></ProviderDashboard>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/user-dashboard",
-        element: (
-          <PrivateRoute>
-            <UserDashboard></UserDashboard>
-          </PrivateRoute>
-        ),
-      },
-      {
         path: "/service-details/:id",
         loader: () => fetch("https://fixitron-server.vercel.app/services"),
         element: (
@@ -76,35 +53,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/manage-services",
-        element: (
-          <PrivateRoute>
-            <ManageServices></ManageServices>
-          </PrivateRoute>
-        ),
-      },
-      {
         path: "/update-service/:id",
         loader: () => fetch("https://fixitron-server.vercel.app/services"),
         element: (
           <PrivateRoute>
             <EditService></EditService>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/booked-services",
-        element: (
-          <PrivateRoute>
-            <BookedServices></BookedServices>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/service-todo",
-        element: (
-          <PrivateRoute>
-            <ServiceToDo></ServiceToDo>
           </PrivateRoute>
         ),
       },
@@ -129,6 +82,64 @@ const router = createBrowserRouter([
       {
         path: "/auth/register",
         Component: Register,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "provider",
+        element: (
+          <PrivateRoute>
+            <ProviderDashboard></ProviderDashboard>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-service",
+        element: (
+          <PrivateRoute>
+            <AddService></AddService>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "manage-services",
+        element: (
+          <PrivateRoute>
+            <ManageServices></ManageServices>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "booked-services",
+        element: (
+          <PrivateRoute>
+            <BookedServices></BookedServices>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "service-todo",
+        element: (
+          <PrivateRoute>
+            <ServiceToDo></ServiceToDo>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "user",
+        element: (
+          <PrivateRoute>
+            <UserDashboard></UserDashboard>
+          </PrivateRoute>
+        ),
       },
     ],
   },

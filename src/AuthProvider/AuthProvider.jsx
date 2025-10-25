@@ -10,11 +10,13 @@ import {
 } from "firebase/auth";
 import { auth } from "../Firebase/firebase.init";
 import { GoogleAuthProvider } from "firebase/auth";
+import axios from "axios";
 
 const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [role, setRole] = useState(null); // ✅ Add role state
   const [loading, setLoading] = useState(true);
 
   const googleSignIn = () => {
@@ -36,24 +38,42 @@ const AuthProvider = ({ children }) => {
 
   const updateUser = (updatedData) => updateProfile(auth.currentUser, updatedData);
 
+  // ✅ Load current user and role from backend
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("Current user in auth state changed", currentUser);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+
+      if (currentUser?.email) {
+        try {
+          const res = await axios.get(
+            `http://localhost:3000/users/${currentUser.email}`
+          );
+          setRole(res.data.role || null); // ✅ Save role from MongoDB
+        } catch (error) {
+          console.error("Failed to fetch user role:", error);
+          setRole(null);
+        }
+      } else {
+        setRole(null);
+      }
+
       setLoading(false);
     });
-    return () => unSubscribe();
+
+    return () => unsubscribe();
   }, []);
 
   const userInfo = {
     user,
+    role, // ✅ Provide role to context
+    loading,
     createUser,
     signInUser,
     googleSignIn,
-    loading,
     updateUser,
     logOut,
-    setUser, // Optional: provide setUser if you want to update manually
+    setUser, // Optional
+    setRole, // Optional 
   };
 
   return <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>;

@@ -15,67 +15,67 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
-  e.preventDefault();
-  const form = e.target;
-  const formData = new FormData(form);
-  const email = formData.get("email");
-  const password = formData.get("password");
-  const name = formData.get("name");
-  const photo = formData.get("photo");
-  const role = formData.get("role");
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const name = formData.get("name");
+    const photo = formData.get("photo");
+    const role = formData.get("role");
 
-  console.log("Role selected:", role);
+    console.log("Role selected:", role);
 
-  // Validate role
-  if (!role) {
-    setError("Please select a role");
-    return;
-  }
+    // Validate role
+    if (!role) {
+      setError("Please select a role");
+      return;
+    }
 
-  // Password validation first
-  const passwordRegExp = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
-  if (!passwordRegExp.test(password)) {
-    setError(
-      "Password must have one uppercase, one lowercase, and 6 characters or longer"
-    );
-    return;
-  }
+    // Password validation first
+    const passwordRegExp = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+    if (!passwordRegExp.test(password)) {
+      setError(
+        "Password must have one uppercase, one lowercase, and 6 characters or longer"
+      );
+      return;
+    }
 
-  try {
-    // Firebase Auth দিয়ে ইউজার তৈরি
-    const result = await createUser(email, password);
-    const user = result.user;
+    try {
+      // Firebase Auth দিয়ে ইউজার তৈরি
+      const result = await createUser(email, password);
+      const user = result.user;
 
-    await updateUser({ displayName: name, photoURL: photo });
-    setUser({ ...user, displayName: name, photoURL: photo });
+      await updateUser({ displayName: name, photoURL: photo });
+      setUser({ ...user, displayName: name, photoURL: photo });
 
-    // MongoDB তে ইউজার + role save (Axios)
-    const response = await axios.post("http://localhost:3000/signup", {
-      name,
-      email,
-      role,
-    });
+      // MongoDB তে ইউজার + role save (Axios)
+      const response = await axios.post("http://localhost:3000/signup", {
+        name,
+        email,
+        role,
+      });
 
-    console.log("MongoDB response:", response.data);
+      console.log("MongoDB response:", response.data);
 
-    Swal.fire({
-      title: "Signup successfully!",
-      icon: "success",
-      draggable: true,
-    });
+      Swal.fire({
+        title: "Signup successfully!",
+        icon: "success",
+        draggable: true,
+      });
 
-    // Role অনুযায়ী redirect
-    if (role === "provider") navigate("/provider-dashboard");
-    else navigate("/user-dashboard");
-  } catch (error) {
-    console.log("Signup error:", error);
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: error.response?.data?.message || error.message,
-    });
-  }
-};
+      // Role অনুযায়ী redirect
+      if (role === "provider") navigate("/dashboard/provider");
+      else navigate("/dashboard/user");
+    } catch (error) {
+      console.log("Signup error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.response?.data?.message || error.message,
+      });
+    }
+  };
   // const handleGoogleLogin = () => {
   //   googleSignIn()
   //     .then((result) => {
@@ -97,54 +97,53 @@ const Register = () => {
   //     });
   // };
 
-const handleGoogleLogin = async () => {
-  try {
-    const result = await googleSignIn();
-    const user = result.user;
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await googleSignIn();
+      const user = result.user;
 
-    const userData = {
-      name: user.displayName,
-      email: user.email,
-      role: "user", // ✅ Default role
-    };
+      const userData = {
+        name: user.displayName,
+        email: user.email,
+        role: "user", // ✅ Default role
+      };
 
-    // ✅ Check if user exists
-    const checkRes = await axios.get(
-      `http://localhost:3000/users/${user.email}`
-    );
+      // ✅ Check if user exists
+      const checkRes = await axios.get(
+        `http://localhost:3000/users/${user.email}`
+      );
 
-    if (!checkRes.data.exists) {
-      // ✅ Only insert if not exists
-      await axios.post("http://localhost:3000/users", userData);
+      if (!checkRes.data.exists) {
+        // ✅ Only insert if not exists
+        await axios.post("http://localhost:3000/users", userData);
+      }
+
+      // ✅ Now get the role
+      const roleRes = await axios.get(
+        `http://localhost:3000/users/${user.email}`
+      );
+
+      const role = roleRes.data.role;
+
+      Swal.fire({
+        title: "Login successfully!",
+        icon: "success",
+      });
+
+      // Role অনুযায়ী redirect
+      if (role === "provider") navigate("/dashboard/provider");
+      else navigate("/dashboard/user");
+      
+    } catch (error) {
+      console.log(error);
+
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error?.response?.data?.message || error.code,
+      });
     }
-
-    // ✅ Now get the role
-    const roleRes = await axios.get(
-      `http://localhost:3000/users/${user.email}`
-    );
-
-    const role = roleRes.data.role;
-
-    Swal.fire({
-      title: "Login successfully!",
-      icon: "success",
-    });
-
-    // Role অনুযায়ী redirect
-    if (role === "provider") navigate("/provider-dashboard");
-    else navigate("/user-dashboard");
-
-  } catch (error) {
-    console.log(error);
-
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: error?.response?.data?.message || error.code,
-    });
-  }
-};
-
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f7fbf2]">
